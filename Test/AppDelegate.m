@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GuideViewController.h"
-#import "LaunchViewController.h"
+#import "MainViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -24,7 +24,7 @@
     
 //    NSUserDefaults *userDefualts=[NSUserDefaults standardUserDefaults];
 //    if([[userDefualts valueForKey:@"flag"] boolValue]==YES){
-        LaunchViewController *launch=[[LaunchViewController alloc] init];
+        MainViewController *launch=[[MainViewController alloc] init];
         self.window.rootViewController=launch;
 //    }else{
 //    GuideViewController *gvc=[[GuideViewController alloc] init];

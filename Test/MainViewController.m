@@ -8,6 +8,10 @@
 
 #import "MainViewController.h"
 #import "ItemView.h"
+#import "BaseNavigationViewController.h"
+#import "NewsViewController.h"
+#import "TopViewController.h"
+#import "ItemView.h"
 @interface MainViewController ()<ItemViewDelegate>
 
 @end
@@ -16,9 +20,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self loadvc];
+    [self loadTabBar];
+
 }
 
+-(void) loadTabBar{
+    UIImageView *tabBarBg=[[UIImageView alloc] initWithFrame:self.tabBar.bounds];
+    tabBarBg.image=[UIImage imageNamed:@"tab_bg_all"];
+    [self.tabBar addSubview:tabBarBg];
+    
+//    NSArray *titles = @[@"首页", @"新闻", @"Top", @"影院", @"更多"];
+    CGFloat width=kScreenWidth/5;
+//    for (int i=0; i<5; i++) {
+        ItemView *it=[[ItemView alloc] initWithFrame:CGRectMake(0*width, 0, width, kTabBarHeight)];
+//        it.delegate=self;
+        [it setItemImage:[UIImage imageNamed:@"movie_home"] forState:UIControlStateNormal];
+        [it setItemTitle:@"Top"];
+        [tabBarBg addSubview:it];
+//    }
+}
+-(void) loadvc{
+    NewsViewController *home=[[NewsViewController alloc] init];
+    home.tabBarItem.title=@"xxxxx";
+    home.view.backgroundColor=[UIColor greenColor];
+    
+    TopViewController *top=[[TopViewController alloc] init];
+    top.tabBarItem.title=@"yyy";
+    top.view.backgroundColor=[UIColor blueColor];
+    NSArray *veiws=@[home];
+    // Do any additional setup after loading the view.
+    NSMutableArray *arr=[NSMutableArray arrayWithCapacity:[veiws count]];
+    for(UIViewController *vc in arr) {
+        
+        BaseNavigationViewController *nav=[[BaseNavigationViewController  alloc] initWithRootViewController:home];
+        [arr addObject:nav];
+    }
+    [self setViewControllers:arr];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
